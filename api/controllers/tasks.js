@@ -13,12 +13,14 @@ const getTasks = async (req, res) => {
 const getTask = async (req, res) => {
     const {id} = req.params;
 
-    const {rows} = await pool.query(`SELECT * FROM tasks WHERE id = ${parseInt(id)}`);
+    console.log("id:", id)
+
+    const {rows} = await pool.query(`SELECT * FROM tasks WHERE id = $1`, [id]);
 
     if(rows.length < 1){
         return res.status(400).json({
             error: true,
-            message: "there is no task with id", id
+            message: "there is no task with id "+ id
         })
     }
 
@@ -55,5 +57,6 @@ const createTask = async (req, res) => {
 
 module.exports = {
     createTask,
-    getTasks
+    getTasks,
+    getTask
 }
