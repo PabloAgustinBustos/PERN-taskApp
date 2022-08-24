@@ -73,9 +73,29 @@ const updateTask = async(req, res) => {
     })
 }
 
+const deleteTask = async(req, res) => {
+    console.log("entre")
+    const {id} = req.params;
+
+    const {rowCount} = await pool.query(`DELETE FROM tasks WHERE id = $1`, [id]);
+
+    if(rowCount < 1){
+        return res.status(400).json({
+            error: true,
+            message: "there is no task with id " + id
+        })
+    }
+
+    res.status(200).json({
+        error: false,
+        message: "task deleted"
+    })
+}
+
 module.exports = {
     createTask,
     getTasks,
     getTask,
-    updateTask
+    updateTask,
+    deleteTask
 }
