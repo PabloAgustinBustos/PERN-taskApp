@@ -13,8 +13,6 @@ const getTasks = async (req, res) => {
 const getTask = async (req, res) => {
     const {id} = req.params;
 
-    console.log("id:", id)
-
     const {rows} = await pool.query(`SELECT * FROM tasks WHERE id = $1`, [id]);
 
     if(rows.length < 1){
@@ -55,8 +53,29 @@ const createTask = async (req, res) => {
     })
 }
 
+const updateTask = async(req, res) => {
+    const {id} = req.params;
+    const {name, completed} = req.body;
+
+    const {rowCount, rows} = await pool.query(`UPDATE tasks SET name=$1, completed = $2 WHERE id = $3`, [name, completed, id]);
+
+    if(rowCount < 1){
+        return res.status(400).json({
+            error: true,
+            message: "None rows were updated"
+        })
+    }
+
+    res.status(200).json({
+        error: false,
+        message: "task updated",
+        result: rows[0]
+    })
+}
+
 module.exports = {
     createTask,
     getTasks,
-    getTask
+    getTask,
+    updateTask
 }
