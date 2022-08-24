@@ -1,5 +1,15 @@
 const pool = require("../db");
 
+const getTasks = async (req, res) => {
+    const {rows} = await pool.query(`SELECT * FROM tasks`);
+
+    res.status(200).json({
+        error: false,
+        length: rows.length,
+        results: rows
+    })
+}
+
 const createTask = async (req, res) => {
     const {name} = req.body;
 
@@ -26,5 +36,6 @@ const createTask = async (req, res) => {
 }
 
 module.exports = {
-    createTask
+    createTask,
+    getTasks
 }
