@@ -1,0 +1,62 @@
+.taskContainer{
+    margin-bottom: 30px;
+    width: 100%;
+    height: 80px;
+    /* background-color: aqua; */
+    box-shadow: 0px 1px 5px -2px black;
+    border-radius: 10px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: .2s transform;
+}
+
+.taskContainer:hover{
+    cursor: default;
+    transform: scale(110%, 110%);
+    transition: .2s transform;
+}
+
+.container{
+    width: 100%;
+    /* background-color: aqua; */
+    display: grid;
+    grid-template-columns: 1fr 6fr 2fr;
+}
+
+.checkbox{
+    height: 60px;
+    /* background-color: blueviolet; */
+    font-size: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.green{
+    color: green;
+}
+
+.title{
+    /* background-color: coral; */
+    font-size: 35px;
+    display: flex;
+    align-items: center;
+}
+
+.buttons{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.button{
+    font-size: 40px;
+
+    display: flex;
+}
+
+.button:hover{
+    cursor:pointer
+}
