@@ -10,6 +10,26 @@ const getTasks = async (req, res) => {
     })
 }
 
+const getTask = async (req, res) => {
+    const {id} = req.params;
+
+    console.log("id:", id)
+
+    const {rows} = await pool.query(`SELECT * FROM tasks WHERE id = $1`, [id]);
+
+    if(rows.length < 1){
+        return res.status(400).json({
+            error: true,
+            message: "there is no task with id "+ id
+        })
+    }
+
+    res.status(200).json({
+        error: false,
+        result: rows[0]
+    })
+}
+
 const createTask = async (req, res) => {
     const {name} = req.body;
 
@@ -37,5 +57,6 @@ const createTask = async (req, res) => {
 
 module.exports = {
     createTask,
-    getTasks
+    getTasks,
+    getTask
 }

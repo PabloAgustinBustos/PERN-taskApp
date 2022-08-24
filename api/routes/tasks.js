@@ -1,7 +1,8 @@
 const rutas = require("express").Router();
-const { createTask, getTasks } = require("../controllers/tasks");
+const { createTask, getTasks, getTask } = require("../controllers/tasks");
 
 rutas.get("/", getTasks)
+rutas.get("/:id", getTask);
 rutas.post("/", createTask);
 
 module.exports = rutas;
